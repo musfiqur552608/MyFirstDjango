@@ -1,5 +1,7 @@
+from django import forms
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from .forms import *
 # Create your views here.
 def myfunctioncall(request):
     return HttpResponse("Hello World")
@@ -45,3 +47,55 @@ def myimagepage(request):
 
 def myimagepage2(request):
     return render(request, 'imagepage2.html')
+
+def myimagepage3(request):
+    return render(request, 'imagepage3.html')    
+
+def myimagepage4(request):
+    return render(request, 'imagepage4.html')
+
+def myimagepage5(request, imagename):
+    myimagename = str(imagename)
+    myimagename = myimagename.lower()
+    print(myimagename)
+    if myimagename == "django":
+        var = True
+    elif myimagename == "python":
+        var = False
+    
+    mydictionary = {
+        "var":var
+    }
+    return render(request, 'imagepage5.html', context=mydictionary)
+
+def myform(request):
+    return render(request, 'myform.html')
+
+def submitmyform(request):
+    mydictionary = {
+        "var1" : request.POST['mytext'],
+        "var2" : request.POST['mytextarea'],
+        "method" : request.method
+    }
+    return JsonResponse(mydictionary)
+
+def myform2(request):
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            title = request.POST['title']
+            subject = request.POST['subject']
+            mydictionary = {
+                "form" : FeedbackForm()
+            }
+            mydictionary["success"] = True
+            mydictionary["successmsg"] = "Form Submitted"
+            return render(request,'myform2.html', context=mydictionary)
+
+            
+    elif request.method == "GET":
+        form = FeedbackForm()
+        mydictionary = {
+            "form" : form
+        }
+        return render(request,'myform2.html', context=mydictionary)
