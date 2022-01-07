@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Image Page{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="col-md-6" style="margin: 0 auto;">
+            <img src="{% static 'django.png' %}" class="img-fluid" alt="django image">
+        </div>
+    </div>
+{% endblock %}

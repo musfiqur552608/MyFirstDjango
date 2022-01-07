@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block title %}My Second Page{% endblock %}
+{% block content %}
+    <h1>Hello, world! Django Project Thirdpage</h1>
+    <h1>{{var}}</h1>
+    <h1>{{msg}}</h1>
+    <ul>
+        {%for i in myfruits %}
+        <li>{{i}}</li>
+        {% endfor %}
+    </ul>
+
+    {% if ans %}
+    <h1>{{num1}} is greater than {{num2}}</h1>
+    {% else %}
+    <h1>{{num2}} is greater than {{num1}}</h1>
+    {% endif %}
+{% endblock %}
